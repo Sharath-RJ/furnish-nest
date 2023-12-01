@@ -262,21 +262,21 @@
             let Subtotal = 0;
 
             if (order == 1) {
-                fetch(`/getProductDetails?id=${pro_id}`)
+                fetch(`/cart/getProductDetails?id=${pro_id}`)
                     .then((res) => res.json())
                     .then((data) => {
                         const sellingPrice = data.sellingPrice;
-                        fetch(`/getQuantity?id=${itemId}`)
+                        fetch(`/cart/getQuantity?id=${itemId}`)
                             .then((res) => res.json())
                             .then((Q) => {
                                 const currentQuantity = Q.quantity;
                                 if (currentQuantity < stockLimit) {
-                                    fetch(`/updateQuantity?id=${itemId}&order=${order}`)
+                                    fetch(`/cart/updateQuantity?id=${itemId}&order=${order}`)
                                         .then((res) => res.json())
                                         .then((update) => {
                                             const updatedQuantity = update.quantity;
                                             Subtotal = updatedQuantity * sellingPrice; // Update the existing Subtotal
-                                            fetch('/getProductInfo')
+                                            fetch('/cart/getProductInfo')
                                                 .then((res) => res.json())
                                                 .then((data) => {
                                                     totalAmount = data.reduce((total, item) => {
@@ -298,21 +298,21 @@
                             });
                     });
             } else if (order == -1) {
-                fetch(`/getProductDetails?id=${pro_id}`)
+                fetch(`/cart/getProductDetails?id=${pro_id}`)
                     .then((res) => res.json())
                     .then((data) => {
                         const sellingPrice = data.sellingPrice;
-                        fetch(`/getQuantity?id=${itemId}`)
+                        fetch(`/cart/getQuantity?id=${itemId}`)
                             .then((res) => res.json())
                             .then((data) => {
                                 const currentQuantity = data.quantity;
                                 if (currentQuantity > 1) {
-                                    fetch(`/updateQuantity?id=${itemId}&order=${order}`)
+                                    fetch(`/cart/updateQuantity?id=${itemId}&order=${order}`)
                                         .then((res) => res.json())
                                         .then((data) => {
                                             const updatedQuantity = data.quantity;
                                             Subtotal = updatedQuantity * sellingPrice; // Update the existing Subtotal
-                                            fetch('/getProductInfo')
+                                            fetch('/cart/getProductInfo')
                                                 .then((res) => res.json())
                                                 .then((data) => {
                                                     totalAmount = data.reduce((total, item) => {
@@ -348,14 +348,14 @@
             if(result.isConfirmed){
                 $.ajax({
                     type: 'GET',
-                    url: `/removeCart?id=${id}`,
+                    url: `/cart/removeCart?id=${id}`,
                     success: function (response) {
                        
                         if (response.response === 'removed') {
                             if (length == 1)
                                 window.location.reload()
                             $(`#remove-item_${id}`).remove()
-                            fetch('/getProductInfo')
+                            fetch('/cart/getProductInfo')
                                 .then((res) => res.json())
                                 .then((data) => {
                                     totalAmount = data.reduce((total, item) => {

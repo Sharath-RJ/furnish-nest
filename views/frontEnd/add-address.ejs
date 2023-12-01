@@ -209,12 +209,12 @@
                     // Send a POST request via AJAX to the server
                     $.ajax({
                         type: 'POST',
-                        url: '/addingAddress', // Route on the server to handle password change
+                        url: '/order/addingAddress', // Route on the server to handle password change
                         data: formData,
                         success: function (response) {
                             if (response.response === 'ok') {
                                 // Display a SweetAlert for incorrect old password
-                                window.location.href = "/checkOut"
+                                window.location.href = "/cart/checkOut"
                             } else {
                                 Swal.fire({
                                     icon: 'error',

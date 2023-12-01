@@ -7,10 +7,10 @@ const orderedItemModel = new Schema({
     },
 
     products: Array,
-    productIds: {
+    productIds:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: "product",
-    },
+    }],
     total: Number,
     address: String,
     name: String,

@@ -6,10 +6,10 @@ const cartModel=new schema({
       type:mongoose.Schema.Types.ObjectId,
       ref:'customers'
    },
-   productId:{
+   productId:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:'products'
-   },
+   }],
    quantity:Number
 
 },{timestamps:true})

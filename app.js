@@ -57,6 +57,7 @@ app.use("/profile", profileRouter)
 app.use("/admin/order", orderRouter)
 app.use("/order", orderRouter)
 app.use("/admin/coupon",couponRouter)
+app.use("/coupon",couponRouter)
 app.use("/wishList", wishListRouter)
 app.get("*", (req, res) => {
     res.render("PageNotFound")

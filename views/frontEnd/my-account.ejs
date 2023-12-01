@@ -164,7 +164,7 @@
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>ID</th>
+                                                                    <th>Image</th>
                                                                     <th>Total</th>
                                                                     <th>Status</th>
                                                                     <th>Date</th>
@@ -176,7 +176,17 @@
                                                                 <% for(orders of myOrders) { %>
                                                                     <tr>
                                                                         <td>
-                                                                            <%= orders._id %>
+                                                                            <% orders.products.slice(0, 2).forEach((element, i)=> { %>
+                                                                                <img src="/backEnd/images/cropped_image/<%= element.image[0] %>" width="40" height="40" class="img-xs" alt="Item">
+                                                                                <% }) %>
+                                                                                    <% if (orders.products.length> 2) { %>
+                                                                                        <!-- Display ellipsis or any other indicator for more images -->
+                                                                                        <span style="font-size: 30px;"> . . .</span>
+                                                                                        <% } %>
+
+                                                                    
+                                                                           
+                                                                           
                                                                         </td>
                                                                         <td>
                                                                             <%= orders.total %>
@@ -566,7 +576,7 @@
                     // Send a POST request via AJAX to the server
                     $.ajax({
                         type: "POST",
-                        url: "/addAddress", // Route on the server to handle address addition
+                        url: "/profile/addAddress", // Route on the server to handle address addition
                         data: formData,
                         success: function (response) {
                             if (response.response === "saved") {
